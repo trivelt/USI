@@ -1,5 +1,7 @@
 #include <QApplication>
+#include <QGraphicsObject>
 #include "qmlapplicationviewer.h"
+#include "connectioncontroller.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -9,6 +11,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/USI/main.qml"));
     viewer.showExpanded();
+
+    ConnectionController controller;
+    QObject* object = qobject_cast<QObject*>(viewer.rootObject());
+    controller.setViewer(object);
+    controller.connectSignals();
 
     return app->exec();
 }
