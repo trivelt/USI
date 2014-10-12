@@ -8,6 +8,7 @@ Rectangle {
     color: "#84377D"
     radius: 15
 
+    signal systemSig()
 
     Button
     {
@@ -15,6 +16,11 @@ Rectangle {
         text: "system"
         x: 5
         y: 5
+        MouseArea
+        {
+            anchors.fill: parent
+            onClicked: systemSig();
+        }
     }
 
     Button {

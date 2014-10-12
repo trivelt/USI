@@ -1,16 +1,25 @@
 import QtQuick 1.1
 
 Rectangle {
+    signal sigExit()
     width: 800
     height: 600
     color: "#2C001E"
 
+    Connections
+    {
+        target: mainMenu
+        onSystemSig: optionsPanel.unameVisible = true
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            Qt.quit();
+            sigExit()
+            //Qt.quit();
         }
     }
+
     MainMenu
     {
         id: mainMenu
@@ -31,6 +40,11 @@ Rectangle {
         id: resultsPanel
         y: parent.height-height-20
         anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    function changeResult(result)
+    {
+        resultsPanel.text = result;
     }
 
 }
